@@ -1,0 +1,1138 @@
+/* ===========================
+   1. GLOBAL & SCROLL LOCK
+   =========================== */
+html, body {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    background-color: #f4f7fb;
+    
+    /* Force height and hide overflow to block scrolling during load */
+    height: 100%; 
+    overflow: hidden; 
+    
+    /* Unlock scrolling after animation (7.5s) */
+    animation: allowScroll 0.1s forwards 7.5s;
+}
+
+@keyframes allowScroll {
+    to {
+        overflow: auto;
+        height: auto;
+    }
+}
+
+/* ===========================
+   2. SPLASH SCREEN
+   =========================== */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff; 
+    z-index: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===========================
+   3. WEBSITE CONTENT (Slides Up)
+   =========================== */
+.website-content {
+    position: relative;
+    z-index: 2000; 
+    background-color: #f4f7fb; 
+    width: 100%;
+    
+    /* Start BELOW the screen */
+    transform: translateY(100vh); 
+    
+    /* Animation: Wait 6s, then slide UP over 1.5s */
+    animation: slideUpFromBottom 1.5s ease-out 6s forwards;
+}
+
+/* ===========================
+   4. NAVIGATION BAR (Fixed & Synced)
+   =========================== */
+.main-header {
+    /* Always Fixed to viewport */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3000; /* Highest Z-Index (above content) */
+    
+    /* Start BELOW screen (synced with content) */
+    transform: translateY(100vh); 
+    
+    /* Apply EXACT SAME animation as website-content */
+    animation: slideUpFromBottom 1.5s ease-out 6s forwards;
+}
+
+/* Shared Animation for Content AND Navbar */
+@keyframes slideUpFromBottom {
+    0% {
+        transform: translateY(100vh); 
+    }
+    100% {
+        transform: translateY(0); 
+    }
+}
+
+/* Navbar Styling - KEEPING YOUR FRAME */
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 15px 40px;
+    min-height: 70px;
+    background-color: rgba(89, 138, 171, 0.181); /* Your existing background */
+    border-bottom: 2px solid rgb(82, 81, 81);    /* Your existing border */
+    box-sizing: border-box;
+    gap: 10px; /* Space between logo and text */
+    overflow: visible; /* Ensure nothing is hidden */
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    margin-left: auto; /* Push navigation links to the right */
+    padding: 0;
+    align-items: center;
+}
+
+/* Navbar Logo Image */
+.navbar-logo {
+    height: 40px;                /* Small size for the logo */
+    width: auto;
+    margin-right: 10px;          /* Space between logo and text */
+}
+
+/* --- UPDATED: Logo with Black Pill --- */
+.logo {
+    background-color: rgba(0, 0, 0, 0.577);     /* Black curved rectangle */
+    color: white;                /* White text */
+    padding: 8px 20px;           /* Padding to create the shape */
+    border-radius: 30px;         /* Makes it curved */
+    font-size: 20px;             /* Adjust size if needed */
+    margin: 0;
+}
+
+.navbar ul li {
+    margin-left: 50px;
+}
+
+/* --- UPDATED: Links with Black Pill --- */
+.navbar ul li a {
+    background-color: rgba(0, 0, 0, 0.577);     /* Black curved rectangle */
+    color: white;                /* White text */
+    padding: 8px 20px;           /* Padding to create the shape */
+    border-radius: 30px;         /* Makes it curved */
+    text-decoration: none;
+    display: inline-block;       /* Ensures shape renders correctly */
+    transition: background-color 0.3s;
+}
+
+.navbar ul li a:hover {
+    background-color: #333;      /* Slightly lighter black on hover */
+    color: #fff;
+}
+
+/* --- Login Button Styling --- */
+.navbar ul li a.login-btn {
+    background-color: #ffdc5f;   /* Brand Yellow */
+    color: #000;                 /* Black text for better contrast */
+    font-weight: bold;
+    border: 2px solid #ffdc5f;   /* Border for visibility */
+    box-shadow: 0 2px 8px rgba(255, 220, 95, 0.4); /* Glow effect */
+}
+
+.navbar ul li a.login-btn:hover {
+    background-color: #000;      /* Black background on hover */
+    color: #ffdc5f;              /* Yellow text on hover */
+    border-color: #ffdc5f;
+    box-shadow: 0 4px 12px rgba(255, 220, 95, 0.6);
+}
+
+/* ===========================
+   5. REST OF THE DESIGN
+   =========================== */
+
+/* Hero Section */
+.gallery {
+    height: 100vh;
+    background-image: url("Images/img1.webp");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-top: 80px; 
+}
+
+.gallery h1 {
+    margin-bottom: 80px;
+    font-size: 150px;
+    color: rgb(199, 212, 224);
+}
+
+/* Categories */
+.categories {
+    padding: 60px;
+    text-align: center;
+}
+
+#categories {
+    background-color: #ffffff;
+    padding: 80px 60px;
+}
+
+.categories h2 {
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+/* Cards */
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 360px;
+    height: 260px;
+    perspective: 1000px;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 25px; 
+    overflow: visible; 
+}
+
+.card-front {
+    border: 3px solid #ffdc5f;
+    background-color: #fff; 
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 22px; 
+}
+
+/* .card-front::before {
+    content: "";
+    position: absolute;
+    bottom: -3px;  
+    right: 20px;
+    width: 110px;
+    height: 20px;
+    background-color: #ffffff00; 
+    z-index: 2;
+} */
+
+.bird-name {
+    position: absolute;
+    bottom: -12px;
+    left: 20px;
+    background-color: #ffffff;
+    padding: 2px 10px;
+    font-size: 18px;
+    color: #0a1d37;
+    font-weight: 600;
+    z-index: 3;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0); 
+}
+
+.card-back {
+    background-color:#a0bded;
+    color: white;
+    transform: rotateY(180deg);
+    padding: 20px;
+    box-sizing: border-box;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+    background-color: #bfd5f1;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.social-icons a {
+    color: white;
+    margin: 0 10px;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #7fbfff;
+}
+
+/* Feedback Form */
+.feedback-form {
+    max-width: 500px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.feedback-form input,
+.feedback-form select,
+.feedback-form textarea {
+    padding: 12px;
+    font-family: inherit;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus,
+.feedback-form select:focus {
+    outline: none;
+    border-color: #7fbfff;
+}
+
+.feedback-form button {
+    background-color: #94bfea;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.feedback-form button:hover {
+    background-color: #7fbfff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .gallery h1 {
+        font-size: 80px;
+    }
+
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ===========================
+   6. EXHIBITIONS SECTION
+   =========================== */
+
+/* Header styling */
+.exhibition-header {
+    text-align: left;
+    max-width: 1000px;
+    margin: 0 auto 60px auto;
+    padding-left: 20px;
+}
+
+.subtitle {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 10px;
+    font-family: sans-serif; /* Clean font for subtitle */
+}
+
+.exhibition-header h2 {
+    font-size: 45px;
+    margin: 0;
+    color: #0a1d37;
+}
+
+/* Timeline Container */
+.timeline-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    /* This creates the long vertical line */
+    border-left: 2px solid #333;
+    padding-left: 40px; /* Space between line and content */
+}
+
+/* Individual Event Item */
+.timeline-item {
+    display: flex; /* Creates the Left/Right layout */
+    margin-bottom: 80px;
+    position: relative;
+}
+
+/* The Black Dot */
+.timeline-dot {
+    position: absolute;
+    left: -51px; /* Positions it exactly on the border line */
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 50%;
+    border: 2px solid #f4f7fb; /* Tiny white ring to separate from line */
+}
+
+/* LEFT SIDE: Date & Title */
+.timeline-left {
+    flex: 1; /* Takes up about 1/3 space */
+    padding-right: 40px;
+    min-width: 250px;
+}
+
+.exhibition-date {
+    font-family: sans-serif;
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.timeline-left h3 {
+    font-size: 32px;
+    margin: 0;
+    line-height: 1.2;
+    color: #000;
+}
+
+/* RIGHT SIDE: Content */
+.timeline-right {
+    flex: 2; /* Takes up about 2/3 space */
+}
+
+.timeline-right img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    object-fit: cover;
+}
+
+/* Special grid for the seagull images */
+.image-grid {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+.image-grid img {
+    width: 50%; /* Side by side images */
+    height: 250px;
+    margin-bottom: 0;
+}
+
+.timeline-right p {
+    font-family: sans-serif; /* Cleaner reading font */
+    font-size: 16px;
+    line-height: 1.7;
+    color: #444;
+    margin: 0;
+}
+
+.highlight-text {
+    color: #c0392b; /* Red color for emphasis */
+    font-weight: bold;
+}
+
+.invite-link {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.invite-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive: Stack columns on mobile */
+@media (max-width: 768px) {
+    .timeline-item {
+        flex-direction: column;
+    }
+    
+    .timeline-left {
+        margin-bottom: 20px;
+    }
+    
+    .timeline-container {
+        padding-left: 30px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .timeline-dot {
+        left: -41px;
+    }
+    
+    .exhibition-header {
+        padding-left: 20px;
+    }
+}
+
+/* ===========================
+   7. NEW FEEDBACK SECTION
+   =========================== */
+
+.feedback-section {
+    padding: 100px 20px;
+    background-color: #f4f7fb;
+    display: flex;
+    justify-content: center;
+}
+
+.feedback-container {
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    background-color: #ffffff;
+    box-shadow: 0 20px 50px rgba(10, 29, 55, 0.1); /* Soft shadow */
+    border-radius: 20px;
+    overflow: hidden; /* Keeps the border radius on child elements */
+}
+
+/* --- Left Side (Visual/Dark) --- */
+.feedback-left {
+    flex: 1;
+    background-color: #1b3256; /* Dark Navy to contrast with white */
+    color: #ffffff;
+    padding: 60px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* decorative background pattern hint */
+.feedback-left::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0%, transparent 20%);
+    pointer-events: none;
+}
+
+.decorative-icon {
+    font-size: 50px;
+    color: #ffdc5f; /* The yellow accent from your bird cards */
+    margin-bottom: 25px;
+}
+
+.feedback-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    margin: 0 0 20px 0;
+    line-height: 1;
+}
+
+.feedback-left p {
+    font-family: sans-serif;
+    line-height: 1.6;
+    color: #ffffff; /* Soft blue text */
+    margin-bottom: 40px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.contact-info i {
+    margin-right: 10px;
+    color: #94bfea;
+}
+
+/* --- Right Side (Form/Light) --- */
+.feedback-right {
+    flex: 1.3; /* Slightly wider than the left side */
+    padding: 60px;
+    background-color: #fff;
+}
+
+.elegant-form h3 {
+    font-size: 24px;
+    margin-bottom: 40px;
+    color: #333;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* --- Input Styling (The "Line" look) --- */
+.input-group {
+    position: relative;
+    margin-bottom: 35px;
+}
+
+/* Remove default boxes, use only bottom border */
+.elegant-form input,
+.elegant-form textarea,
+.elegant-form select {
+    width: 100%;
+    padding: 10px 0;
+    font-family: 'Playfair Display', serif; /* Handwriting feel */
+    font-size: 18px;
+    color: #333;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    outline: none;
+    background: transparent;
+    transition: border-color 0.3s;
+    border-radius: 0; /* Removes default radius */
+}
+
+.elegant-form textarea {
+    resize: none;
+}
+
+/* Floating Label Logic */
+.elegant-form label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #999;
+    pointer-events: none;
+    transition: 0.3s ease all;
+}
+
+/* When input focuses or has text (placeholder hack), move label up */
+.elegant-form input:focus ~ label,
+.elegant-form input:not(:placeholder-shown) ~ label,
+.elegant-form textarea:focus ~ label,
+.elegant-form textarea:not(:placeholder-shown) ~ label {
+    top: -20px;
+    font-size: 12px;
+    color: #0a1d37;
+    font-weight: bold;
+}
+
+/* The Line Animation */
+.elegant-form input:focus,
+.elegant-form select:focus,
+.elegant-form textarea:focus {
+    border-bottom-color: #0a1d37; /* Dark navy on focus */
+}
+
+/* --- Submit Button --- */
+.submit-btn {
+    background-color: transparent;
+    color: #0a1d37;
+    border: 2px solid #0a1d37;
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.submit-btn:hover {
+    background-color: #0a1d37;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+    .feedback-container {
+        flex-direction: column;
+    }
+    
+    .feedback-left, .feedback-right {
+        padding: 40px;
+    }
+
+    .feedback-left {
+        text-align: center;
+        align-items: center;
+    }
+}
+/* ===========================
+   8. MODERN ROUNDED FOOTER
+   =========================== */
+
+.artistic-footer {
+    /* A darker shade of your card-back blue (#a0bded -> #6b94c4) */
+    background-color: #6c9fda; 
+    color: white; 
+    
+    /* Deeply rounded top corners */
+    border-radius: 80px 80px 0 0; 
+    
+    /* Spacing */
+    padding: 80px 60px 40px 60px;
+    margin-top: 100px; /* Space above so the curve is visible */
+    
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    
+    /* Soft shadow to make the curve pop against the white background */
+    box-shadow: 0 -10px 40px rgba(107, 148, 196, 0.2); 
+}
+
+.footer-content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Top Section --- */
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center vertically */
+    flex-wrap: wrap;
+    gap: 60px;
+    margin-bottom: 60px;
+}
+
+.footer-brand {
+    flex: 1;
+    min-width: 300px;
+}
+
+.footer-brand h2 {
+    font-size: 42px; /* Larger logo */
+    margin: 0 0 15px 0;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.footer-brand p {
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #e6eff9; /* Very light blue-white */
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(61, 147, 194, 0.527); /* Glass effect */
+    color: white;
+    border-radius: 50%; /* Perfect circle */
+    text-decoration: none;
+    font-size: 20px;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(49, 99, 174, 0.629);
+}
+
+.social-links a:hover {
+    background-color: #ffdc5f; /* Your Brand Yellow */
+    color: #3e3434; /* Dark Icon */
+    transform: translateY(-5px) scale(1.1); /* Pop up effect */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* --- Newsletter Box (Bubble Style) --- */
+.footer-newsletter {
+    flex: 1.2;
+    background-color: #6096d0; /* Slightly darker inner bubble */
+    padding: 40px;
+    border-radius: 50px; /* Highly rounded container */
+    text-align: center;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+}
+
+.footer-newsletter h3 {
+    font-size: 28px;
+    margin: 0 0 10px 0;
+    color: white;
+}
+
+.footer-newsletter p {
+    font-family: sans-serif;
+    font-size: 15px;
+    margin-bottom: 25px;
+    color: #dbe7f5;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+    background: white;
+    padding: 8px;
+    border-radius: 50px; /* Pill shape form */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.newsletter-form input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 16px;
+    color: #333;
+    font-family: sans-serif;
+}
+
+.newsletter-form button {
+    background-color: #ffdc5f; /* Brand Yellow */
+    color: #3e3434;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 50px; /* Pill button */
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.newsletter-form button:hover {
+    background-color: #3e3434;
+    color: #ffdc5f;
+}
+
+/* --- Divider --- */
+.footer-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    margin-bottom: 50px;
+}
+
+/* --- Bottom Links --- */
+.footer-bottom-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-family: sans-serif;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.link-group h4 {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: #ffdc5f;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.link-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.link-group ul li {
+    margin-bottom: 15px;
+}
+
+.link-group ul li a,
+.link-group ul li {
+    color: #e6eff9;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    display: block;
+}
+
+.link-group ul li a:hover {
+    color: #ffdc5f;
+    transform: translateX(5px);
+}
+
+.copyright {
+    align-self: flex-end;
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+}
+
+/* --- Responsive --- */
+@media (max-width: 850px) {
+    .artistic-footer {
+        border-radius: 50px 50px 0 0; /* Less rounded on mobile */
+        padding: 60px 30px 30px 30px;
+    }
+
+    .footer-top {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .footer-bottom-links {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+    }
+    
+    .newsletter-form input {
+        width: 100%;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .newsletter-form button {
+        width: 100%;
+    }
+}
+
+/* ===========================
+   9. MAGAZINE STYLE ABOUT SECTION
+   =========================== */
+
+.about-section {
+    padding: 120px 20px;
+    background-color: #ffffff; /* Clean white background */
+    overflow: hidden; /* Prevents images from spilling out */
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 80px; /* Space between images and text */
+}
+
+/* --- Left Side: Images --- */
+.about-images {
+    flex: 1;
+    position: relative;
+    height: 500px; /* Fixed height to manage stacking */
+    min-width: 400px;
+}
+
+/* The Box Outline */
+.img-decoration {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    width: 350px;
+    height: 450px;
+    border: 3px solid #ffdc5f; /* Brand Yellow */
+    z-index: 1;
+}
+
+/* The Back Image (Portrait) */
+.img-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 350px;
+    height: 450px;
+    object-fit: cover;
+    z-index: 2;
+    filter: grayscale(20%); /* Artistic touch */
+    transition: 0.5s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* The Front Image (Square/Landscape) */
+.img-front {
+    position: absolute;
+    bottom: 20px;
+    right: -20px; /* Pushes it slightly out */
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border: 8px solid #ffffff; /* Thick white border to separate */
+    z-index: 3;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    transition: 0.5s;
+}
+
+/* Hover Effect: Images move apart slightly */
+.about-images:hover .img-back {
+    transform: translateY(-10px);
+    filter: grayscale(0%);
+}
+
+.about-images:hover .img-front {
+    transform: translateY(10px) translateX(10px);
+}
+
+/* --- Right Side: Text --- */
+.about-text {
+    flex: 1;
+}
+
+.kicker {
+    display: block;
+    font-family: sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #6b94c4; /* Footer Blue */
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.about-text h2 {
+    font-size: 50px;
+    line-height: 1.1;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.about-text h2 em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #6b94c4; /* Highlight color */
+}
+
+.main-desc {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #222;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.sub-desc {
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+/* --- Features Grid --- */
+.about-features {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.feature-item i {
+    font-size: 24px;
+    color: #ffdc5f; /* Brand Yellow Icon */
+}
+
+.feature-item span {
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.4;
+    color: #333;
+}
+
+/* --- Signature --- */
+.signature-block p {
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.signature-font {
+    font-family: 'Playfair Display', serif; /* Or use a cursive font like 'Great Vibes' if you load it */
+    font-size: 32px;
+    color: #333;
+    font-style: italic;
+    letter-spacing: -1px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .about-container {
+        flex-direction: column;
+    }
+
+    .about-images {
+        width: 100%;
+        height: 450px; /* Adjust height for mobile */
+        display: flex;
+        justify-content: center;
+        min-width: unset;
+    }
+    
+    .img-decoration {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .img-back {
+        left: 50%;
+        transform: translateX(-60%); /* Shift slightly left */
+    }
+
+    .img-front {
+        right: 50%;
+        transform: translateX(60%); /* Shift slightly right */
+    }
+}

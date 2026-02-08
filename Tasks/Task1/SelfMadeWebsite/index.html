@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Feathered Frame - Bird Art Gallery</title>
+    <link rel="icon" type="image/png" href="Images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+</head>
+
+<body>
+
+    <!-- 1. SPLASH SCREEN -->
+    <div id="splash-screen">
+        <dotlottie-player 
+            src="Images/flying bird.lottie" 
+            background="transparent" 
+            speed="1" 
+            style="width: 100%; height: 100%;" 
+            loop 
+            autoplay>
+        </dotlottie-player>
+    </div>
+
+    <!-- 2. NAVBAR (MOVED OUTSIDE) -->
+    <!-- We animate this separately so it stays fixed correctly -->
+    <header class="main-header">
+        <nav class="navbar">
+            <img src="Images/logo.png" alt="Logo" class="navbar-logo">
+            <h2 class="logo">Art Gallery</h2>
+            <ul>
+                <li><a href="#categories">Gallery</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#feedback">Feedback</a></li>
+                <li><a href="#login" class="login-btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 3. REST OF WEBSITE CONTENT -->
+    <div class="website-content">
+
+        <!-- Hero Section -->
+        <section class="gallery">
+            <h1>THE FEATHERED FRAME</h1>
+        </section>
+
+        <!-- Categories Section -->
+        <section id="categories" class="categories">
+            <h2><i class="fa-solid fa-dove"></i>Experience the Joy of Living with Original Art</h2>
+            <div class="card-container">
+                <!-- Blue Bird -->
+                <article class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="Images/bluebird.webp" alt="Blue Bird">
+                            <span class="bird-name">Blue Bird</span>
+                        </div>
+                        <div class="card-back">
+                            <h3>Blue Bird</h3>
+                            <p>Symbol of happiness and hope. Known for its bright blue feathers.</p>
+                        </div>
+                    </div>
+                </article>
+                <!-- Woodpecker -->
+                <article class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="Images/woodpecker.webp" alt="Woodpecker">
+                            <span class="bird-name">Woodpecker</span>
+                        </div>
+                        <div class="card-back">
+                            <h3>Woodpecker</h3>
+                            <p>Famous for tapping trees. Represents strength and persistence.</p>
+                        </div>
+                    </div>
+                </article>
+                <!-- Hummingbird -->
+                <article class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="Images/hummingbird.jpg" alt="Hummingbird">
+                            <span class="bird-name">Hummingbird</span>
+                        </div>
+                        <div class="card-back">
+                            <h3>Hummingbird</h3>
+                            <p>Small and colorful bird. Symbol of joy and energy.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+<!-- Reimagined About Section -->
+<section id="about" class="about-section">
+    <div class="about-container">
+        
+        <!-- LEFT: Artistic Image Composition -->
+        <div class="about-images">
+            <!-- Back image (Environment/Studio shot) -->
+            <img src="Images/birdonpaper.jpg" alt="Studio Art" class="img-back">
+            <!-- Front image (Close up detail) -->
+            <img src="Images/sparrow.jpg" alt="Bird Detail" class="img-front">
+            <!-- Decorative colored box behind -->
+            <div class="img-decoration"></div>
+        </div>
+
+        <!-- RIGHT: The Story -->
+        <div class="about-text">
+            <span class="kicker">About Us - The Curator's Vision</span>
+            <h2>Preserving Nature's <br> <em>Fleeting Moments</em></h2>
+            
+            <p class="main-desc">
+                The Feathered Frame is more than a gallery; it is a sanctuary for the soaring spirits of the avian world. We believe that every feather tells a story of survival, freedom, and grace.
+            </p>
+            
+            <p class="sub-desc">
+                Founded in 2026, our mission is to connect collectors with artwork that breathes. From the silent vigil of the owl to the vibrant dart of the hummingbird, our curated pieces are selected for their ability to bring the wild outdoors into the intimacy of your home.
+            </p>
+
+            <!-- Small Feature Icons -->
+            <div class="about-features">
+                <div class="feature-item">
+                    <i class="fa-solid fa-certificate"></i>
+                    <span>Certified<br>Authentic</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                    <span>Ethically<br>Sourced</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <span>Global<br>Artists</span>
+                </div>
+            </div>
+
+            <!-- "Handwritten" Signature -->
+            <div class="signature-block">
+                <p>Curated with passion,</p>
+                <span class="signature-font">The Feathered Frame Team</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- ... (After About Section) ... -->
+
+<!-- Exhibitions Section -->
+<section id="exhibitions" class="categories">
+    <div class="exhibition-header">
+        <p class="subtitle">UPCOMING EXHIBITIONS</p>
+        <h2>Exhibitions</h2>
+    </div>
+
+    <div class="timeline-container">
+        
+        <!-- EVENT 1: Christmas Exhibition -->
+        <div class="timeline-item">
+            <!-- The Dot -->
+            <div class="timeline-dot"></div>
+            
+            <!-- Left Side: Date & Title -->
+            <div class="timeline-left">
+                <span class="exhibition-date">15 November 2026</span>
+                <h3>Wings of Stillness</h3>
+
+            </div>
+
+            <!-- Right Side: Content -->
+            <div class="timeline-right">
+                <img src="Images/whitebird.jpg" alt="Ducks Painting">
+                
+                <p>
+                    Opening on Saturday, 15th November, this exhibition celebrates serenity, purity, and quiet strength through a curated collection of avian artworks. Centered around the white pigeon — a timeless symbol of peace and grace — the exhibition brings together refined paintings and sculptures from distinguished wildlife artists.
+                    <br><br>
+                    Each piece captures stillness in motion, inviting viewers to pause and reflect on nature's most delicate expressions.
+                    <br><br>
+                    <span class="highlight-text">Join us from midday for an intimate viewing accompanied by light refreshments.</span>
+                    <br><br>
+                    <a href="#" class="invite-link">Your Invitation is here!</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- EVENT 2: Late Night View -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            
+            <div class="timeline-left">
+                <span class="exhibition-date">20 November 2026</span>
+                <h3>Flight of Imagination</h3>
+
+            </div>
+
+            <div class="timeline-right">
+                <img src="Images/flachbird.jpg" alt="Christmas Market Poster">
+                
+                <p>
+                    An evening exhibition inspired by imagination and movement, featuring a striking crested bird rendered through expressive form and texture. This collection explores the boundary between realism and artistic interpretation, where feathers become rhythm and flight becomes emotion.
+                    <br><br>
+                    Designed for those drawn to bold creativity, the exhibition transforms the gallery into a space of visual storytelling and contemporary wildlife expression.
+                    <br><br>
+                    <span class="highlight-text">The gallery remains open late, welcoming visitors into an atmospheric and festive setting.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- EVENT 3: Featured Artist (Eagle and Owl) -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            
+            <div class="timeline-left">
+                <span class="exhibition-date">Featured Collection</span>
+                <h3>Guardians of the Sky</h3>
+
+            </div>
+
+            <div class="timeline-right">
+                <!-- Using a grid for the eagle and owl images you showed -->
+                <div class="image-grid">
+                    <img src="Images/sculpture1.jpg" alt="Eagle Art">
+                    <img src="Images/sculpture2.webp" alt="Owl Art">
+                </div>
+                
+                <p>
+                    This sculptural showcase brings together the commanding presence of the eagle and the quiet wisdom of the owl. Crafted in fine detail, these works celebrate balance — strength and stillness, vigilance and grace.
+                    <br><br>
+                    Each sculpture reflects the artist's mastery of form and material, capturing the spirit of these birds beyond surface detail and into character and symbolism.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Feedback Section -->
+<section id="feedback" class="feedback-section">
+    <div class="feedback-container">
+        
+        <!-- Left Side: Visual/Text -->
+        <div class="feedback-left">
+            <div class="feedback-content">
+                <i class="fa-solid fa-feather-pointed decorative-icon"></i>
+                <h2>Guestbook</h2>
+                <p>Did the collection inspire you? We would love to hear your thoughts on the pieces and your experience at The Feathered Frame.</p>
+                <div class="contact-info">
+                    <span><i class="fa-solid fa-envelope"></i> curator@featheredframe.com</span>
+                    <span><i class="fa-solid fa-phone"></i> +1 234 567 8900</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: The Form -->
+        <div class="feedback-right">
+            <form class="elegant-form">
+                <h3>Share Your Experience</h3>
+                
+                <div class="input-group">
+                    <input type="text" id="name" required placeholder=" ">
+                    <label for="name">Your Name</label>
+                    <span class="highlight"></span>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="email" required placeholder=" ">
+                    <label for="email">Email Address</label>
+                    <span class="highlight"></span>
+                </div>
+
+                <div class="input-group">
+                    <select required>
+                        <option value="" disabled selected>Rate your experience</option>
+                        <option>Excellent</option>
+                        <option>Good</option>
+                        <option>Average</option>
+                        <option>Poor</option>
+                    </select>
+                    <span class="highlight"></span>
+                </div>
+
+                <div class="input-group">
+                    <textarea id="message" rows="4" required placeholder=" "></textarea>
+                    <label for="message">Your Message</label>
+                    <span class="highlight"></span>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Submit Entry <i class="fa-solid fa-arrow-right-long"></i>
+                </button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+        <!-- Artistic Footer (Consistent Palette) -->
+        <footer class="artistic-footer">
+            <div class="footer-content-wrapper">
+                
+                <!-- Top Section: Brand & Newsletter -->
+                <div class="footer-top">
+                    <div class="footer-brand">
+                        <h2 class="logo">The Feathered Frame</h2>
+                        <p>Curating the soaring spirits of avian life.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-newsletter">
+                        <h3>Join the Flock</h3>
+                        <p>Get exhibition updates sent to your inbox.</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Enter your email...">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Divider Line -->
+                <div class="footer-divider"></div>
+
+                <!-- Bottom Section: Links & Info -->
+                <div class="footer-bottom-links">
+                    <div class="link-group">
+                        <h4>Menu</h4>
+                        <ul>
+                            <li><a href="#categories">Gallery</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#feedback">Feedback</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><i class="fa-solid fa-envelope"></i> hello@featheredframe.com</li>
+                            <li><i class="fa-solid fa-location-dot"></i> Art District, Block 4</li>
+                        </ul>
+                    </div>
+
+                    <div class="copyright">
+                        <p>&copy; 2026 The Feathered Frame.</p>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+
+
+    </div>
+
+</body>
+</html>

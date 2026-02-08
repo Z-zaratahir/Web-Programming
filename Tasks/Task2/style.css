@@ -1,0 +1,84 @@
+/* Container styling */
+#container {
+    width: 500px;
+    height: 100px;
+    border: 1px solid #ffffff;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* Box styling with transition */
+#box {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(11, 196, 67);
+    position: absolute;
+    left: 0;
+    top: 25px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(249, 248, 248, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Box hover effect - moves back and forth continuously */
+#box:hover {
+    animation: moveBackAndForth 2s ease-in-out infinite;
+    background-color: rgb(224, 9, 127);
+    box-shadow: 0 5px 15px rgba(224, 9, 127, 0.5);
+}
+
+/* Keyframe animation for back and forth movement */
+@keyframes moveBackAndForth {
+    0% {
+        transform: translateX(0px) rotate(0deg) scale(1);
+    }
+    50% {
+        transform: translateX(450px) rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: translateX(0px) rotate(360deg) scale(1);
+    }
+}
+
+/* Button styling with hover effect */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: rgb(53, 145, 75);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: rgb(107, 103, 99);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(197, 31, 31, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(255, 253, 253, 0.2); 
+}
+
+/* Button container */
+body {
+    font-family: Arial, sans-serif;
+    padding: 50px;
+    background: linear-gradient(135deg, #2f6335 0%, #1c0d2a 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container hover effect */
+#container:hover {
+    border-color: rgb(5, 246, 25);
+    box-shadow: 0 0 20px rgba(8, 179, 79, 0.3);
+    transition: all 0.3s ease;
+}

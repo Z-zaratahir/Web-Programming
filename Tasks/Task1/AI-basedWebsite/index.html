@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Feathered Frame - Bird Art Gallery</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="Images/logo.png">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="Images/logo.png" alt="The Feathered Frame Logo" class="logo-img">
+                <h2>The Feathered Frame</h2>
+            </div>
+            <ul>
+                <li><a href="#categories"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#feedback"><i class="fas fa-comments"></i> Feedback</a></li>
+                <li><a href="#login" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gallery">
+        <h1>THE FEATHERED FRAME</h1>
+    </section>
+
+    <!-- Categories Section -->
+<section id="categories" class="categories">
+    <h2><i class="fa-solid fa-dove"></i> Bird Categories</h2>
+
+    <div class="card-container">
+
+        <!-- Blue Bird -->
+        <article class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="Images/bluebird.webp" alt="Blue Bird">
+                    <span class="bird-name">Blue Bird</span>
+                </div>
+                <div class="card-back">
+                    <h3>Blue Bird</h3>
+                    <p>Symbol of happiness and hope. Known for its bright blue feathers.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Woodpecker -->
+        <article class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="Images/woodpecker.webp" alt="Woodpecker">
+                    <span class="bird-name">Woodpecker</span>
+                </div>
+                <div class="card-back">
+                    <h3>Woodpecker</h3>
+                    <p>Famous for tapping trees. Represents strength and persistence.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Hummingbird -->
+        <article class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="Images/hummingbird.jpg" alt="Hummingbird">
+                    <span class="bird-name">Hummingbird</span>
+                </div>
+                <div class="card-back">
+                    <h3>Hummingbird</h3>
+                    <p>Small and colorful bird. Symbol of joy and energy.</p>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section id="about" class="about-section">
+    <div class="about-container">
+        <div class="about-header">
+            <h2><i class="fas fa-feather-alt"></i> About Us - The Curator's Vision</h2>
+            <h3 class="about-subtitle">Preserving Nature's<br>Fleeting Moments</h3>
+        </div>
+        
+        <div class="about-content">
+            <p class="about-intro">
+                The Feathered Frame is more than a gallery; it is a sanctuary for the soaring spirits of the avian world. 
+                We believe that every feather tells a story of survival, freedom, and grace.
+            </p>
+            
+            <p class="about-description">
+                Founded in 2026, our mission is to connect collectors with artwork that breathes. From the silent vigil 
+                of the owl to the vibrant dart of the hummingbird, our curated pieces are selected for their ability to 
+                bring the wild outdoors into the intimacy of your home.
+            </p>
+            
+            <div class="about-features">
+                <div class="feature-card">
+                    <i class="fas fa-certificate"></i>
+                    <h4>Certified<br>Authentic</h4>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Ethically<br>Sourced</h4>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-globe"></i>
+                    <h4>Global<br>Artists</h4>
+                </div>
+            </div>
+            
+            <p class="about-signature">
+                <em>Curated with passion,</em><br>
+                <strong>The Feathered Frame Team</strong>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Feedback Section -->
+<section id="feedback" class="feedback-section">
+    <div class="feedback-container">
+        <h2><i class="fas fa-comments"></i> Share Your Thoughts</h2>
+        <p class="feedback-subtitle">We value your feedback and would love to hear from you</p>
+        
+        <form class="feedback-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject"><i class="fas fa-tag"></i> Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="Subject" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message"><i class="fas fa-comment-dots"></i> Message</label>
+                <textarea id="message" name="message" rows="6" placeholder="Share your experience with us..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="rating"><i class="fas fa-star"></i> Rating</label>
+                <div class="rating-container">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5" class="star">★</label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4" class="star">★</label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3" class="star">★</label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2" class="star">★</label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1" class="star">★</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Submit Feedback
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- Smooth Scroll Script -->
+<script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Form submission handler
+    document.querySelector('.feedback-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your feedback! We appreciate your input.');
+        this.reset();
+    });
+</script>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3><i class="fas fa-feather-alt"></i> The Feathered Frame</h3>
+            <p>A sanctuary for the soaring spirits of the avian world. Curating nature's most elegant moments.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+            </div>
+        </div>
+        
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#categories"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                <li><a href="#feedback"><i class="fas fa-chevron-right"></i> Feedback</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section">
+            <h4>Contact</h4>
+            <ul class="contact-info">
+                <li><i class="fas fa-map-marker-alt"></i> 123 Gallery Street, Art District</li>
+                <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                <li><i class="fas fa-envelope"></i> info@featheredframe.com</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; 2026 The Feathered Frame. All Rights Reserved. | Crafted with <i class="fas fa-heart"></i> for Bird Art Lovers</p>
+    </div>
+</footer>
+
+</body>
+</html>
