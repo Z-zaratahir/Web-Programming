@@ -2,18 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Move Box</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bow Zone</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div id="container">
-        <div id="box"></div>
+    <!-- Main Menu Screen -->
+    <div id="main-menu">
+        <video id="menu-video" autoplay loop muted playsinline>
+            <source src="Video/From KlickPin CF Pin on Dibujos.mp4" type="video/mp4">
+        </video>
+        
+        <div id="wooden-board">
+            <h1 id="game-title">Bow Zone</h1>
+            <button id="start-game-btn">Start Game</button>
+        </div>
     </div>
 
-    <button onclick="toggleMove()">Move Box</button>
-    <button onclick="speedUp()">Speed Up</button>
-    <button onclick="slowDown()">Slow Down</button>
+    <div id="game-container" class="hidden">
+        <!-- Game Header -->
+        <div id="game-header">
+            <div id="score-display">
+                <span class="label">Score:</span>
+                <span id="score">0</span>
+            </div>
+            <div id="timer-display">
+                <span class="label">Time:</span>
+                <span id="time">60</span>s
+            </div>
+            <div id="arrows-display">
+                <span class="label">Arrows:</span>
+                <span id="arrow-count">11</span>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div id="game-area">
+            <!-- Moving Target -->
+            <div id="target">
+                <img src="Images/target.png" alt="Target">
+            </div>
+
+            <!-- Bow (rotates with mouse) -->
+            <div id="bow">
+                <img src="Images/bow.png" alt="Bow">
+            </div>
+
+            <!-- Arrow Container (arrows will be added dynamically) -->
+            <div id="arrow-container"></div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over" class="hidden">
+            <h2>Game Over!</h2>
+            <p>Final Score: <span id="final-score">0</span></p>
+            <button id="restart-btn">Play Again</button>
+        </div>
+
+        <!-- Instructions -->
+        <div id="instructions">
+            Move mouse to aim | Click to shoot
+        </div>
+    </div>
+
+    <!-- Preload hit sound for instant playback -->
+    <audio id="hit-sound" preload="auto">
+        <source src="Sound/yodguard-a-clean-and-precise-game-style-arrow-impact-4-450239.mp3" type="audio/mpeg">
+    </audio>
 
     <script src="script.js"></script>
 </body>
