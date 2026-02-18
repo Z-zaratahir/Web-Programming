@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- side navbar for history & undo redo -->
+    <nav class="sidebar" id="sidenav">
+        <div class="navhdr">
+            <h3>History</h3>
+            <button id="togglenav" class="navbtn">◀</button>
+        </div>
+        
+        <div class="undoredopnl">
+            <button id="undobtn" class="actbtn" disabled>Undo</button>
+            <button id="redobtn" class="actbtn" disabled>Redo</button>
+        </div>
+
+        <ul id="histlist" class="histlist">
+            <!-- hist items added dynamically -->
+        </ul>
+    </nav>
+
+    <!-- main content -->
+    <div class="maincontainer">
+        <header class="headr">
+            <h1>Photo Editor</h1>
+            <p class="subtitle">professional image editing tool</p>
+        </header>
+        
+        <div class="editorwrap">
+            <!-- filter panel - matches assignment screenshots -->
+            <div class="editorpnl">
+                <div class="filtsec">
+                    <label class="secttl">Filters</label>
+                    <div class="filtopts">
+                        <button data-filter="brightness" class="filtbtn active">Brightness</button>
+                        <button data-filter="saturation" class="filtbtn">Saturation</button>
+                        <button data-filter="inversion" class="filtbtn">Inversion</button>
+                        <button data-filter="grayscale" class="filtbtn">Grayscale</button>
+                        <button data-filter="sepia" class="filtbtn">Sepia</button>
+                        <button data-filter="blur" class="filtbtn">Blur</button>
+                        <button data-filter="rotate" class="filtbtn">Rotate</button>
+                    </div>
+
+                    <div class="sliderinfo">
+                        <span id="filtname">Brightness</span>
+                        <span id="filtval">100%</span>
+                    </div>
+                    <input type="range" id="rngslider" min="0" max="200" value="100" step="1">
+                </div>
+
+                <div class="rotsec">
+                    <label class="secttl">Rotate & Flip</label>
+                    <div class="rotbtns">
+                        <button id="rotleft" class="iconbtn" title="Rotate Left">↺</button>
+                        <button id="rotright" class="iconbtn" title="Rotate Right">↻</button>
+                        <button id="flipx" class="iconbtn" title="Flip Horizontal">⇄</button>
+                        <button id="flipy" class="iconbtn" title="Flip Vertical">⇅</button>
+                    </div>
+                </div>
+                
+                <button id="resetbtn" class="resetbtn">RESET FILTERS</button>
+            </div>
+
+            <!-- img preview -->
+            <div class="prevarea">
+                <div class="imgwrap">
+                    <img id="imgprev" alt="image preview">
+                    <div class="placeholder" id="placeholder">
+                        <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                            <rect width="100" height="100" rx="10" fill="#f0f0f0"/>
+                            <path d="M30 40L50 60L70 45L80 60V70H20V60L30 40Z" fill="#d0d0d0"/>
+                            <circle cx="35" cy="35" r="8" fill="#d0d0d0"/>
+                        </svg>
+                        <p>no image selected</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- bottom controls -->
+        <div class="ctrlrow">
+            <input type="file" id="fileinp" accept="image/*" hidden>
+            <button id="chsimgbtn" class="ctrlbtn grey">CHOOSE IMAGE</button>
+            <button id="saveimgbtn" class="ctrlbtn blue">SAVE IMAGE</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
