@@ -13,6 +13,7 @@ class user {
     this.password = password;
   }
 
+  // Register new user in database
   async register() {
     try {
       const existinguser = await usermodel.findOne({ 

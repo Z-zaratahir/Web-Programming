@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // Create User model from schema
-const UserModel = mongoose.model('users-ai', userSchema);
+const UserModel = mongoose.model('users-through-ai', userSchema);
 
 /**
  * User Class - Handles user authentication operations
