@@ -46,6 +46,7 @@ app.post('/login', async (req, res) => {
   const loginuser = new user(username, password);
   const result = await loginuser.login();
   if (result.success) {
+    // Create session for logged-in user
     req.session.user = username;
     res.redirect('/html/homepage.html');
   } else {

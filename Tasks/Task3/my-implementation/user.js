@@ -34,6 +34,7 @@ class user {
     }
   }
 
+  // Login user and verify credentials
   async login() {
     try {
       const founduser = await usermodel.findOne({ 
