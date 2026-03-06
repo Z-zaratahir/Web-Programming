@@ -54,6 +54,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
+// Protected dashboard route - requires authentication
 app.get('/dashboard', authmiddleware, (req, res) => {
   res.send(`welcome ${req.session.user}`);
 });
