@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="shortcut icon" href="../Images/logo.png" type="image/logo">
+    <link rel="stylesheet" href="../css/signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="bgimg">
+        <div class="wrapper">
+            <div class="container">
+                
+                <div class="forms">
+                    <div class="form-content">
+                        <div class="signup-form">
+                            <div class="title">Create an account</div>
+                                <form action="http://localhost:3001/register" method="POST">
+                                    <div class="input-boxes">
+
+                                        <div class="input-box">
+                                            <i class="fas fa-user"></i>
+                                            <input type="text" name="username" placeholder="Enter your username" required>
+                                        </div>
+
+                                        <div class="input-box">
+                                            <i class="fas fa-lock"></i>
+                                            <input type="password" name="password" placeholder="Enter your password" required>
+                                        </div>
+
+                                        <div class="tacbox">
+                                            <input type="checkbox" required />
+                                            I agree to the Terms and Conditions and Privacy Policy.
+                                        </div>
+
+                                        <button type="submit" class="button">Submit</button>
+
+                                        <div id="message" style="margin-top: 10px; font-size: 14px; text-align: center;"></div>
+
+                                        <div class="signupnow">
+                                            Already have an account? <a href="./webite.html"><label>Login now</label></a>
+                                        </div>
+
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+
+        <div class="nav">
+
+            <div class="logo">
+                <img src="../Images/logo.png" class="logoim">
+            </div>
+
+            <div class="logo">
+                <img src="../Images/text.png" class="fontim">
+            </div>
+
+            <div class="search">
+                <button class="buttonsearch"></button>
+                <input type="text" class="input-search" placeholder="Type to search">
+            </div>
+
+        </div>
+    </div> 
+
+    
+    <div class="footer">
+        <div class="container1">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">shipping</a></li>
+                        <li><a href="#">returns</a></li>
+                        <li><a href="#">order status</a></li>
+                        <li><a href="#">payment options</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>company</h4>
+                    <ul>
+                        <li><a href="#">about us</a></li>
+                        <li><a href="#">our services</a></li>
+                        <li><a href="#">privacy policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="copy-right">
+			<div class="copy-right-sec">  
+				Copyright © 2023 | All rights reserved | Designed by Aliza and Zara
+			</div>
+		</section>
+    </div> 
+    
+    <script>
+        const urlparams = new URLSearchParams(window.location.search);
+        const message = document.getElementById('message');
+        
+        if (urlparams.get('error') === 'exists') {
+            message.style.color = '#d9534f';
+            message.textContent = 'User already exists with that username. Please try a different username.';
+        }
+    </script>
+    
+</body>
+</html>
