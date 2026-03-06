@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const connectdb = async () => {
   try {
     // Connect to MongoDB Atlas using Mongoose
-    await mongoose.connect('mongodb+srv://admin:admin123456789@cluster0.2fnyrro.mongodb.net/studentDB?retryWrites=true&w=majority', {
+    await mongoose.connect(process.env.MONGODB_URI, {
       serverSelectionTimeoutMS: 5000
     });
     console.log('database connected');

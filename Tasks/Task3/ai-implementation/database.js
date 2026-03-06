@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const connectDatabase = async () => {
   try {
     // Connecting to MongoDB with modern connection options
-    await mongoose.connect('mongodb+srv://admin:admin123456789@cluster0.2fnyrro.mongodb.net/studentDB?appName=Cluster0', {
+    await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
