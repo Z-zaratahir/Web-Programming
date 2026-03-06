@@ -59,6 +59,7 @@ app.get('/dashboard', authmiddleware, (req, res) => {
   res.send(`welcome ${req.session.user}`);
 });
 
+// Logout route - destroy session
 app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
