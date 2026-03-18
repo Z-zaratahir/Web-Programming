@@ -1,0 +1,46 @@
+.app-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+  text-align: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 16px 0 24px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.nav-link.active {
+  text-decoration: underline;
+}
+
+.page-content {
+  text-align: left;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 520px;
+}
+
+input,
+textarea,
+button {
+  font-size: 16px;
+  padding: 10px;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
