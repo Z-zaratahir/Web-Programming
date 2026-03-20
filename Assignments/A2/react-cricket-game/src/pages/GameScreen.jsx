@@ -225,9 +225,9 @@ export default function gamescreen({ onback, config }) {
         {showprobguide && <ProbabilityGuide probs={curprobs} style={style} />}
       </div>
 
-      {/* BOTTOM HUD - compact floating panel */}
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 20, background: 'rgba(255,251,235,.95)', backdropFilter: 'blur(10px)', borderTop: '2px solid rgba(245,158,11,.3)', boxShadow: '0 -4px 24px rgba(0,0,0,.15)' }}>
-        <div style={{ padding: '9px 14px 11px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+      {/* BOTTOM HUD - Floating Side Panel */}
+      <div style={{ position: 'absolute', bottom: 16, right: 16, zIndex: 20, width: '38%', maxWidth: 480, minWidth: 320, background: 'rgba(255,251,235,.98)', backdropFilter: 'blur(12px)', border: '2px solid rgba(217,119,6,.2)', borderRadius: 24, boxShadow: '0 8px 32px rgba(0,0,0,.22)' }}>
+        <div style={{ padding: '14px 18px', display: 'flex', flexDirection: 'column', gap: 12 }}>
 
           {/* batting style + bowl button */}
           <div style={{ display: 'flex', gap: 8, alignItems: 'stretch' }}>
