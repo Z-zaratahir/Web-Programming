@@ -54,7 +54,7 @@ function batsman(swinging, style) {
   )
 }
 
-export default function groundscene({ ballx, bally, ballvisible, swinging, battingstyle, running }) {
+export default function groundscene({ ballx, bally, ballvisible, swinging, battingstyle, running, ballscale = 1 }) {
   const cc = ['#ef4444', '#f59e0b', '#3d7a1f', '#b45309', '#92400e', '#5aad30', '#d97706', '#b91c1c']
 
   return (
@@ -236,7 +236,7 @@ export default function groundscene({ ballx, bally, ballvisible, swinging, batti
 
         {/* cricket ball */}
         {ballvisible && (
-          <g transform={`translate(${ballx},${bally})`} filter="url(#bglow)">
+          <g transform={`translate(${ballx},${bally}) scale(${ballscale})`} filter="url(#bglow)">
             <circle r={11} fill="#c0392b" />
             <circle r={11} fill="none" stroke="#7f1d1d" strokeWidth="1.5" />
             <path d="M-5,-8 Q0,-2 -5,8" fill="none" stroke="rgba(255,200,200,.8)" strokeWidth="1.5" />

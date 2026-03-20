@@ -47,6 +47,7 @@ export default function gamescreen({ onback, config }) {
   const [comtext,      setcomtext]      = useState('')
   const [showresult,   setshowresult]   = useState(false)
   const [showprobguide,setshowprobguide]= useState(false)
+  const [ballscale,    setballscale]    = useState(1)
 
   const slideref = useRef(0)
   const sounds = useSounds()
@@ -54,29 +55,71 @@ export default function gamescreen({ onback, config }) {
   const startbowling = useCallback(() => {
     if (phase !== 'idle') return
     sounds.playBowl()
-    setrunning(true); setballvisible(true)
+    setrunning(true); setballvisible(true); setballscale(1)
     setballx(700); setbally(252)
     setshowresult(false); setlastresult(null)
-    setTimeout(() => { setrunning(false); setphase('bowling') }, 380)
+
+    // Delivery Phase Animation (RAF)
+    let start = null
+    const dur = 400 
+    const step = (now) => {
+      if (!start) start = now
+      const p = Math.min((now - start) / dur, 1)
+      setballx(700 + Math.sin(p * Math.PI) * 15) // slight curve
+      setbally(252 + p * (468 - 252))
+      if (p < 1) requestAnimationFrame(step)
+      else { setrunning(false); setphase('bowling') }
+    }
+    requestAnimationFrame(step)
   }, [phase, sounds])
 
   const handleshot = useCallback(() => {
     if (phase !== 'bowling') return
-    // outcome calculation now uses slideref.current
     const probs   = style === 'aggressive' ? aggressiveprobs : defensiveprobs
     const outcome = getoutcome(slideref.current, probs)
     const line    = pickline(outcome.label)
 
     setphase('animating'); setswinging(true)
 
-    let prog = 0
-    const ba = setInterval(() => {
-      prog += 0.062
-      setballx(700 + Math.sin(prog * 3) * 8)
-      setbally(252 + prog * (468 - 252))
-      if (prog >= 1) {
-        clearInterval(ba)
-        setballvisible(false); setswinging(false)
+    // Outcome Trajectory Logic
+    let targetX = 700, targetY = 468, targetScale = 1
+    const run = outcome.runs
+    
+    if (run === 6) { 
+      targetX = 400 + Math.random() * 600; targetY = -150; targetScale = 0.4
+    } else if (run === 4) {
+      targetX = Math.random() > 0.5 ? 1500 : -100; targetY = 300 + Math.random() * 300; targetScale = 0.8
+    } else if (run === 0 || run === null) {
+       targetX = 690 + Math.random() * 20; targetY = 485; // hits stumps or near
+    } else {
+       targetX = 200 + Math.random() * 1000; targetY = 200 + Math.random() * 400; targetScale = 0.7
+    }
+
+    let start = null
+    const dur = run === 6 ? 1200 : run === 4 ? 800 : 500
+    const ox = 700, oy = 468
+
+    const step = (now) => {
+      if (!start) start = now
+      const p = Math.min((now - start) / dur, 1)
+      
+      // smoothly move to target
+      setballx(ox + p * (targetX - ox))
+      setbally(oy + p * (targetY - oy))
+      
+      // simulated height for 6s
+      if (run === 6) {
+        const height = Math.sin(p * Math.PI) * 1.2
+        setballscale(1 + height)
+      } else {
+        setballscale(1 + p * (targetScale - 1))
+      }
+
+      if (p < 1) {
+        requestAnimationFrame(step)
+      } else {
+        setswinging(false)
+        setballvisible(false)
         setlastresult(outcome); setcomtext(line); setshowresult(true)
 
         if (outcome.runs === null)   sounds.playWicket()
@@ -108,7 +151,10 @@ export default function gamescreen({ onback, config }) {
           }, 2400)
         }
       }
-    }, 30)
+    }
+    
+    // small delay for swing to "connect"
+    setTimeout(() => requestAnimationFrame(step), 100)
   }, [phase, style, ballsbowled, runs, wickets, bestscore, totalballs, totalwickets, sounds])
 
   const handlerestart = () => {
@@ -129,7 +175,7 @@ export default function gamescreen({ onback, config }) {
 
       {/* FULL SCREEN FIELD - fills entire viewport */}
       <GroundScene
-        ballx={ballx} bally={bally} ballvisible={ballvisible}
+        ballx={ballx} bally={bally} ballvisible={ballvisible} ballscale={ballscale}
         swinging={swinging} battingstyle={style} running={running}
       />
 
