@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useSounds } from '../hooks/useSounds.js'
+import { useSounds } from '../audios/useSounds.js'
 
 export default function splashscreen({ ondone }) {
   const [progress, setprogress] = useState(0)
@@ -48,7 +48,7 @@ export default function splashscreen({ ondone }) {
           BAT-TER UP
         </h1>
         <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700, color: '#92400e', fontSize: 13, letterSpacing: 5, marginTop: 5, opacity: .85 }}>
-          THE DESI CRICKET GAME
+          THE SCHOOL CHAMPIONSHIP
         </p>
 
         {/* loading bar */}

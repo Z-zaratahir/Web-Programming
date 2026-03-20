@@ -43,7 +43,7 @@ export default function homescreen({ onplay, oninstructions, onsettings }) {
           BAT-TER UP!
         </h1>
         <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700, color: '#b45309', fontSize: 13, letterSpacing: 5, opacity: .75, marginTop: 4, marginBottom: 12 }}>
-          DESI GULLY CRICKET
+          INTER-SCHOOL CHAMPIONSHIP
         </p>
 
         {/* mascot + quote */}
@@ -83,7 +83,7 @@ export default function homescreen({ onplay, oninstructions, onsettings }) {
               "Chhakka maaro, champion bano!"
             </p>
             <p style={{ fontFamily: "'Nunito', sans-serif", color: '#b45309', fontSize: 11, margin: '3px 0 0', opacity: .7 }}>
-              - Gully Cricket Proverb
+              - School Cricket Proverb
             </p>
           </div>
         </div>

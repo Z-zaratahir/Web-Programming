@@ -10,7 +10,7 @@ import Scoreboard         from '../components/Scoreboard.jsx'
 import ProbabilityGuide   from '../components/ProbabilityGuide.jsx'
 
 import { aggressiveprobs, defensiveprobs, commentary, speedmap } from '../utils/constants.js'
-import { useSounds } from '../hooks/useSounds.js'
+import { useSounds } from '../audios/useSounds.js'
 
 // inline icons - no external deps
 const IArrow  = () => <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>

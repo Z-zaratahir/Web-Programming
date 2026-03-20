@@ -26,13 +26,13 @@ export const defensiveprobs = [
 
 // commentary picked randomly after each ball
 export const commentary = {
-  W: ['Arrey yaar! Clean bowled!', 'OUT! Bhai kya hua tujhe!', 'Stumps ud gaye!', 'Caught in the outfield!'],
-  0: ['Dot ball. Kuch nahi mila.', 'Blocked nicely, no run.', 'Defended well.'],
-  1: ['Ek run. Chalo theek hai.', 'Nudged for a single!', 'Quick single!'],
-  2: ['Do run! Nice placement!', 'Two runs, good gap!', 'Pushed for two!'],
-  3: ['Teen run! Great running!', 'Three runs on the board!'],
-  4: ['CHAR! Racing to the wall!', 'FOUR! Straight drive!', 'BOUNDARY! Superb shot!'],
-  6: ['CHHAKKA! Ghar ke upar se!', 'SIX! Out of the ground!', 'MAXIMUM! What a hit!', 'Gone over the wall!'],
+  W: ['Arrey yaar! Teacher dekh rahe hain!', 'OUT! School ground se bahar!', 'Stumps ud gaye! Exam mein kya hoga!', 'Caught in the outfield! Team se bahar!'],
+  0: ['Dot ball. Lunch break khatam hone wali hai.', 'Blocked nicely. P.E Sir khush honge.', 'Defended well. Ground chhota hai par shot bada hai.'],
+  1: ['Ek run. Assembly ka time ho raha hai.', 'Quick single! School bag pehen kar bhago!', 'Nudged for a single!'],
+  2: ['Do run! Pura ground cover kar liya!', 'Two runs! Sports day ki practice!', 'Pushed for two!'],
+  3: ['Teen run! Sprint like a champion!', 'Three runs! PT teacher impressed!'],
+  4: ['CHAR! School boundary ke paar!', 'FOUR! Straight to the canteen!', 'BOUNDARY! Superb school-boy shot!'],
+  6: ['CHHAKKA! Principal ke office mein!', 'SIX! Classroom ki khidki tod di!', 'MAXIMUM! School champion!', 'Gone over the goal post!'],
 }
 
 export const sliderSpeed = 0.52
