@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+/* color pallette - warm golden afternoon cricket vibe */
+:root {
+  --green: #3a7d44;
+  --green-light: #5aaa64;
+  --green-dark: #2a5c32;
+  --amber: #f5a623;
+  --amber-dark: #c77c0a;
+  --amber-light: #ffc95c;
+  --cream: #fef9ed;
+  --brown: #7c4a1e;
+  --brown-light: #b07340;
+  --red: #d63031;
+  --red-dark: #a82020;
+  --sky: #87ceeb;
+  --sky
