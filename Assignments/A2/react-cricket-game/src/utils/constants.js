@@ -26,15 +26,52 @@ export const defensiveprobs = [
 
 // commentary picked randomly after each ball
 export const commentary = {
-  W: ['Arrey yaar! Teacher dekh rahe hain!', 'OUT! School ground se bahar!', 'Stumps ud gaye! Exam mein kya hoga!', 'Caught in the outfield! Team se bahar!'],
-  0: ['Dot ball. Lunch break khatam hone wali hai.', 'Blocked nicely. P.E Sir khush honge.', 'Defended well. Ground chhota hai par shot bada hai.'],
-  1: ['Ek run. Assembly ka time ho raha hai.', 'Quick single! School bag pehen kar bhago!', 'Nudged for a single!'],
-  2: ['Do run! Pura ground cover kar liya!', 'Two runs! Sports day ki practice!', 'Pushed for two!'],
-  3: ['Teen run! Sprint like a champion!', 'Three runs! PT teacher impressed!'],
-  4: ['CHAR! School boundary ke paar!', 'FOUR! Straight to the canteen!', 'BOUNDARY! Superb school-boy shot!'],
-  6: ['CHHAKKA! Principal ke office mein!', 'SIX! Classroom ki khidki tod di!', 'MAXIMUM! School champion!', 'Gone over the goal post!'],
+  W: [
+     "OH NO! Straight to the fielder! Kya kar raha hai bhai?",
+     "OUT! Clean bowled! That was a lightning delivery!",
+     "STUMPS GONE! Better luck next time, champ!",
+     "CAUGHT! Brilliant catch, ab pavilion mein rest karo!",
+     "WICKET! The bowler is on fire today! Kya ball hai!",
+     "OUT! That's a huge blow for the team!"
+  ],
+  0: [
+    "Boring dot ball! Hit it hard next time!",
+    "DOT BALL. Fielder is standing like a wall!",
+    "No run! Fielding is too tight today.",
+    "Blocked carefully! Just like a tough exam question.",
+    "Dot ball. Come on, we need some boundaries!"
+  ],
+  1: [
+    "Quick single! Great running between the wickets!",
+    "Ek run! Nicely nudged into the gap.",
+    "Single taken! Keeping the scoreboard moving.",
+    "One run! School speed is impressive!"
+  ],
+  2: [
+    "Two runs! Excellent running, full energy!",
+    "DO RUN! Fielder was too slow to stop that!",
+    "Pushed for two! These kids are fast!"
+  ],
+  3: [
+    "Three runs! Brilliant effort on the field!",
+    "TEEN RUN! Sprinting like it's Sports Day!",
+    "Amazing running! That's hard work right there."
+  ],
+  4: [
+    "FOUR! Beautiful boundary! What a classic shot!",
+    "CHAAR RUN! The fielder was just a spectator!",
+    "BOUNDARY! Pure timing and class!",
+    "FOUR! Straight through the gap, no chance for the fielder!"
+  ],
+  6: [
+    "SIX! That is massive! Ball ground se bahar!",
+    "MAXIMUM! What a shot! Teacher ki khidki bach gayi!",
+    "CHHAKKA! Out of the park! Send someone to fetch the ball!",
+    "SIX! Powerful hit! Stadium is cheering for you!",
+    "SMASHED! That's the shot of the day!"
+  ],
 }
 
-export const sliderSpeed = 0.52
+export const sliderSpeed = 0.72
 
-export const speedmap = { slow: 0.30, normal: 0.52, fast: 0.82 }
+export const speedmap = { slow: 0.50, normal: 0.72, fast: 0.98 }

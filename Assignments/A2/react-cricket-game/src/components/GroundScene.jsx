@@ -1,17 +1,45 @@
 // full viewport desi maidan - no manicured grass, muddy patches, chalk boundary
 
-function bowler(running) {
+function coach() {
   return (
-    <g transform={`translate(${running ? 448 : 430},315)`} style={{ transition: 'transform .3s' }}>
+    <g transform="translate(430,315)">
       <ellipse cx={0} cy={86} rx={16} ry={4} fill="rgba(0,0,0,.1)" />
       <circle cx={0} cy={-22} r={10} fill="#d4a574" />
       <rect x={-11} y={-12} width={22} height={32} rx={6} fill="#3d7a1f" />
-      <rect x={9} y={running ? -28 : -12} width={9} height={22} rx={4.5} fill="#3d7a1f" style={{ transition: 'y .2s' }} />
+      <rect x={9} y={-12} width={9} height={22} rx={4.5} fill="#3d7a1f" />
       <rect x={-11} y={20} width={9} height={26} rx={4} fill="#1c1917" />
       <rect x={2} y={20} width={9} height={26} rx={4} fill="#1c1917" />
       <ellipse cx={0} cy={-34} rx={12} ry={7} fill="#3d7a1f" />
       <rect x={-10} y={-30} width={20} height={7} rx={2} fill="#3d7a1f" />
-      <rect x={-12} y={-26} width={9} height={6} rx={2} fill="#2a5714" />
+      <text x={0} y={65} textAnchor="middle" fill="white" fontSize={10} fontWeight={800} fontFamily="Baloo 2">COACH</text>
+    </g>
+  )
+}
+
+function kidBowler(running) {
+  return (
+    <g transform={`translate(${running ? 710 : 690},215) scale(0.8)`}>
+       {/* backpack */}
+      <rect x={-14} y={-10} width={28} height={20} rx={4} fill="#1d4ed8" /> 
+      <circle cx={0} cy={-22} r={10} fill="#d4a574" />
+      <rect x={-11} y={-12} width={22} height={32} rx={6} fill="white" /> 
+      <path d="M-4 -12 L0 -4 L4 -12" fill="#ef4444" /> 
+      <rect x={9} y={running ? -28 : -12} width={9} height={22} rx={4.5} fill="white" style={{ transition: 'y .2s' }} />
+      <rect x={-11} y={20} width={9} height={26} rx={4} fill="#1c1917" />
+      <rect x={2} y={20} width={9} height={26} rx={4} fill="#1c1917" />
+      <ellipse cx={0} cy={-34} rx={12} ry={7} fill="#b91c1c" />
+    </g>
+  )
+}
+
+function nonStriker() {
+  return (
+    <g transform="translate(745,225) scale(0.75)">
+      <circle cx={0} cy={-22} r={10} fill="#d4a574" />
+      <rect x={-11} y={-12} width={22} height={32} rx={6} fill="white" /> 
+      <rect x={-11} y={20} width={9} height={26} rx={4} fill="#1c1917" />
+      <rect x={2} y={20} width={9} height={26} rx={4} fill="#1c1917" />
+      <ellipse cx={0} cy={-34} rx={12} ry={7} fill="#3d7a1f" />
     </g>
   )
 }
@@ -228,8 +256,12 @@ export default function groundscene({ ballx, bally, ballvisible, swinging, batti
           </g>
         ))}
 
-        {/* bowler */}
-        {bowler(running)}
+        {/* coach */}
+        {coach()}
+
+        {/* new kid bowler & non-striker at stumps end */}
+        {kidBowler(running)}
+        {nonStriker()}
 
         {/* batsman */}
         {batsman(swinging, battingstyle)}

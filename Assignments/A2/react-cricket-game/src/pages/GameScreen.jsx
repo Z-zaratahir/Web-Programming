@@ -56,21 +56,17 @@ export default function gamescreen({ onback, config }) {
     if (phase !== 'idle') return
     sounds.playBowl()
     setrunning(true); setballvisible(true); setballscale(1)
-    setballx(700); setbally(252)
+    
+    // ball starts in kidBowler's hand at stumps end
+    setballx(690); setbally(215) 
     setshowresult(false); setlastresult(null)
+    
+    // bowler "runs" in for a bit
+    setTimeout(() => {
+       setballx(710); // follow bowler to crease
+       setphase('bowling') 
+    }, 300)
 
-    // Delivery Phase Animation (RAF)
-    let start = null
-    const dur = 400 
-    const step = (now) => {
-      if (!start) start = now
-      const p = Math.min((now - start) / dur, 1)
-      setballx(700 + Math.sin(p * Math.PI) * 15) // slight curve
-      setbally(252 + p * (468 - 252))
-      if (p < 1) requestAnimationFrame(step)
-      else { setrunning(false); setphase('bowling') }
-    }
-    requestAnimationFrame(step)
   }, [phase, sounds])
 
   const handleshot = useCallback(() => {
@@ -79,83 +75,93 @@ export default function gamescreen({ onback, config }) {
     const outcome = getoutcome(slideref.current, probs)
     const line    = pickline(outcome.label)
 
-    setphase('animating'); setswinging(true)
+    setphase('animating'); setswinging(true); setrunning(false)
 
-    // Outcome Trajectory Logic
-    let targetX = 700, targetY = 468, targetScale = 1
-    const run = outcome.runs
+    // PHASE 1: Ball travels from bowler to batter (fast)
+    let bStart = null
+    const bDur = 250 // fast delivery
+    const bOx = ballx, bOy = bally // start from where bowler is
     
-    if (run === 6) { 
-      targetX = 400 + Math.random() * 600; targetY = -150; targetScale = 0.4
-    } else if (run === 4) {
-      targetX = Math.random() > 0.5 ? 1500 : -100; targetY = 300 + Math.random() * 300; targetScale = 0.8
-    } else if (run === 0 || run === null) {
-       targetX = 690 + Math.random() * 20; targetY = 485; // hits stumps or near
-    } else {
-       targetX = 200 + Math.random() * 1000; targetY = 200 + Math.random() * 400; targetScale = 0.7
+    const delivery = (now) => {
+      if (!bStart) bStart = now
+      const p = Math.min((now - bStart) / bDur, 1)
+      setballx(bOx + p * (700 - bOx))
+      setbally(bOy + p * (468 - bOy))
+      if (p < 1) requestAnimationFrame(delivery)
+      else playOutcome()
     }
 
-    let start = null
-    const dur = run === 6 ? 1200 : run === 4 ? 800 : 500
-    const ox = 700, oy = 468
-
-    const step = (now) => {
-      if (!start) start = now
-      const p = Math.min((now - start) / dur, 1)
+    // PHASE 2: Outcome Trajectory
+    const playOutcome = () => {
+      let targetX = 700, targetY = 468, targetScale = 1
+      const run = outcome.runs
       
-      // smoothly move to target
-      setballx(ox + p * (targetX - ox))
-      setbally(oy + p * (targetY - oy))
-      
-      // simulated height for 6s
-      if (run === 6) {
-        const height = Math.sin(p * Math.PI) * 1.2
-        setballscale(1 + height)
+      if (run === 6) { 
+        targetX = 400 + Math.random() * 600; targetY = -150; targetScale = 0.4
+      } else if (run === 4) {
+        targetX = Math.random() > 0.5 ? 1500 : -100; targetY = 300 + Math.random() * 300; targetScale = 0.8
+      } else if (run === 0 || run === null) {
+         targetX = 690 + Math.random() * 20; targetY = 485; 
       } else {
-        setballscale(1 + p * (targetScale - 1))
+         targetX = 200 + Math.random() * 1000; targetY = 200 + Math.random() * 400; targetScale = 0.7
       }
 
-      if (p < 1) {
-        requestAnimationFrame(step)
-      } else {
-        setswinging(false)
-        setballvisible(false)
-        setlastresult(outcome); setcomtext(line); setshowresult(true)
+      let oStart = null
+      const oDur = run === 6 ? 1200 : run === 4 ? 800 : 500
+      const ox = 700, oy = 468
 
-        if (outcome.runs === null)   sounds.playWicket()
-        else if (outcome.runs === 6) sounds.playSix()
-        else if (outcome.runs === 4) sounds.playFour()
-        else if (outcome.runs === 0) sounds.playDot()
-        else                         sounds.playRuns(outcome.runs)
-
-        const nb = ballsbowled + 1
-        setballsbowled(nb)
-        let nr = runs, nw = wickets
-
-        if (outcome.runs !== null) {
-          nr = runs + outcome.runs; setruns(nr)
-          if (nr > bestscore) setbestscore(nr)
+      const outcomeStep = (now) => {
+        if (!oStart) oStart = now
+        const p = Math.min((now - oStart) / oDur, 1)
+        setballx(ox + p * (targetX - ox))
+        setbally(oy + p * (targetY - oy))
+        if (run === 6) {
+          const height = Math.sin(p * Math.PI) * 1.5
+          setballscale(1 + height)
         } else {
-          nw = wickets + 1; setwickets(nw)
+          setballscale(1 + p * (targetScale - 1))
         }
 
-        const isover = nb >= totalballs || nw >= totalwickets
-        if (isover) {
-          if (nr >= bestscore) sounds.playWin(); else sounds.playLose()
-          setTimeout(() => { setshowresult(false); setphase('gameover') }, 2400)
+        if (p < 1) {
+          requestAnimationFrame(outcomeStep)
         } else {
-          setTimeout(() => {
-            setshowresult(false)
-            slideref.current = 0
-            setphase('idle')
-          }, 2400)
+          setswinging(false); setballvisible(false)
+          setlastresult(outcome); setcomtext(line); setshowresult(true)
+
+          if (outcome.runs === null)   sounds.playWicket()
+          else if (outcome.runs === 6) sounds.playSix()
+          else if (outcome.runs === 4) sounds.playFour()
+          else if (outcome.runs === 0) sounds.playDot()
+          else                         sounds.playRuns(outcome.runs)
+
+          const nb = ballsbowled + 1
+          setballsbowled(nb)
+          let nr = runs, nw = wickets
+          if (outcome.runs !== null) {
+            nr = runs + outcome.runs; setruns(nr)
+            if (nr > bestscore) setbestscore(nr)
+          } else {
+            nw = wickets + 1; setwickets(nw)
+          }
+
+          const isover = nb >= totalballs || nw >= totalwickets
+          if (isover) {
+            if (nr >= bestscore) sounds.playWin(); else sounds.playLose()
+            setTimeout(() => { setshowresult(false); setphase('gameover') }, 2400)
+          } else {
+            setTimeout(() => {
+              setshowresult(false)
+              slideref.current = 0
+              setphase('idle')
+            }, 2400)
+          }
         }
       }
+      requestAnimationFrame(outcomeStep)
     }
-    
-    // small delay for swing to "connect"
-    setTimeout(() => requestAnimationFrame(step), 100)
-  }, [phase, style, ballsbowled, runs, wickets, bestscore, totalballs, totalwickets, sounds])
+
+    requestAnimationFrame(delivery)
+  }, [phase, style, ballsbowled, runs, wickets, bestscore, totalballs, totalwickets, sounds, ballx, bally])
 
   const handlerestart = () => {
     setruns(0); setwickets(0); setballsbowled(0)
