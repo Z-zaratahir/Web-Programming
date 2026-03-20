@@ -1,49 +1,88 @@
-// power bar - slider is purely positional, no randomness
-export default function powerbar({ probs, sliderpos, onshot, gamephase }) {
-  let cum = 0
-  const segs = probs.map(p => { const s = cum; cum += p.prob; return { ...p, start: s } })
-  const canclick = gamephase === 'bowling'
+import { useEffect, useState, useRef } from 'react'
+import { Target } from 'lucide-react'
+import { speedmap } from '../utils/constants'
+
+export default function PowerBar({ probs, sliderRef, onshot, gamephase, speed = 'normal' }) {
+  const [sliderpos, setSliderpos] = useState(0)
+  const dirRef = useRef(1)
+  const animFrame = useRef(null)
+
+  useEffect(() => {
+    if (gamephase !== 'bowling') {
+      if (gamephase === 'idle') {
+        setSliderpos(0)
+        if (sliderRef) sliderRef.current = 0
+      }
+      return
+    }
+
+    const spd = speedmap[speed] || 0.52
+    const tick = () => {
+      setSliderpos(prev => {
+        let next = prev + dirRef.current * spd
+        if (next >= 100) { next = 100; dirRef.current = -1 }
+        if (next <= 0)   { next = 0;   dirRef.current = 1  }
+        if (sliderRef) sliderRef.current = next
+        return next
+      })
+      animFrame.current = requestAnimationFrame(tick)
+    }
+
+    animFrame.current = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(animFrame.current)
+  }, [gamephase, speed, sliderRef])
+
+  const cum = 0;
+  let runningCum = 0;
+  const segs = probs.map(p => { 
+    const s = runningCum; 
+    runningCum += p.prob; 
+    return { ...p, start: s }; 
+  });
+
+  const canclick = gamephase === 'bowling';
 
   return (
     <div style={{ width: '100%', userSelect: 'none' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-        <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 800, color: '#92400e', fontSize: 10, letterSpacing: 2, textTransform: 'uppercase' }}>Power Bar</span>
-        <span style={{ fontFamily: "'Nunito', sans-serif", color: '#b45309', fontSize: 10 }}>
-          {canclick ? 'Click bar to play shot!' : gamephase === 'idle' ? 'Bowl first' : 'Wait...'}
-        </span>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+        <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 800, color: '#92400e', fontSize: 13, letterSpacing: 2, textTransform: 'uppercase' }}>Power Bar</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#b45309', fontSize: 12, fontFamily: "'Nunito', sans-serif" }}>
+          <Target size={12} color="#b45309" strokeWidth={3} />
+          <span>{canclick ? 'Click bar to play shot!' : gamephase === 'idle' ? 'Bowl first' : 'Wait...'}</span>
+        </div>
       </div>
 
       {/* slider indicator arrow */}
-      <div style={{ position: 'relative', height: 10, marginBottom: 2 }}>
-        <div style={{ position: 'absolute', left: `${sliderpos}%`, transform: 'translateX(-50%)' }}>
-          <div style={{ width: 0, height: 0, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '8px solid #92400e' }} />
+      <div style={{ position: 'relative', height: 14, marginBottom: 3 }}>
+        <div style={{ position: 'absolute', left: `${sliderpos}%`, transform: 'translateX(-50%)', zIndex: 30 }}>
+          <div style={{ width: 0, height: 0, borderLeft: '7px solid transparent', borderRight: '7px solid transparent', borderTop: '10px solid #92400e' }} />
         </div>
       </div>
 
       {/* bar */}
       <div onClick={canclick ? onshot : undefined}
-        style={{ position: 'relative', display: 'flex', height: 48, borderRadius: 13, overflow: 'hidden', border: '2px solid #fde68a', cursor: canclick ? 'pointer' : 'not-allowed', boxShadow: '0 3px 12px rgba(0,0,0,.1),inset 0 2px 0 rgba(255,255,255,.35)' }}>
+        style={{ position: 'relative', display: 'flex', height: 56, borderRadius: 16, overflow: 'hidden', border: '2px solid #fde68a', cursor: canclick ? 'pointer' : 'not-allowed', boxShadow: '0 4px 16px rgba(0,0,0,0.1), inset 0 2px 0 rgba(255,255,255,0.4)' }}>
 
         {segs.map((seg, i) => (
-          <div key={i} style={{ width: `${seg.prob * 100}%`, background: seg.color, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', borderRight: i < segs.length - 1 ? '1.5px solid rgba(255,255,255,.28)' : 'none', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom,rgba(255,255,255,.2) 0%,transparent 55%)', pointerEvents: 'none' }} />
-            <span style={{ fontFamily: "'Baloo 2', cursive", fontWeight: 900, color: 'white', fontSize: seg.prob >= .1 ? 13 : 10, textShadow: '0 1px 3px rgba(0,0,0,.45)', zIndex: 1 }}>{seg.label}</span>
-            {seg.prob >= .08 && <span style={{ fontFamily: "'Nunito', sans-serif", color: 'rgba(255,255,255,.85)', fontSize: 9, zIndex: 1 }}>{Math.round(seg.prob * 100)}%</span>}
+          <div key={i} style={{ width: `${seg.prob * 100}%`, background: seg.color, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', borderRight: i < segs.length - 1 ? '1.5px solid rgba(255,255,255,0.3)' : 'none', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(255,255,255,0.22) 0%, transparent 55%)', pointerEvents: 'none' }} />
+            <span style={{ fontFamily: "'Baloo 2', cursive", fontWeight: 900, color: 'white', fontSize: seg.prob >= 0.1 ? 14 : 10, textShadow: '0 1px 4px rgba(0,0,0,0.5)', zIndex: 1 }}>{seg.label}</span>
+            {seg.prob >= 0.08 && <span style={{ fontFamily: "'Nunito', sans-serif", color: 'rgba(255,255,255,0.85)', fontSize: 9, zIndex: 1 }}>{Math.round(seg.prob * 100)}%</span>}
           </div>
         ))}
 
-        {/* moving slider line */}
-        <div style={{ position: 'absolute', top: 0, bottom: 0, left: `${sliderpos}%`, transform: 'translateX(-50%)', width: 3, background: 'white', boxShadow: '0 0 9px 2px rgba(255,255,255,.9)', zIndex: 20, pointerEvents: 'none' }} />
+        {/* slider line */}
+        <div style={{ position: 'absolute', top: 0, bottom: 0, left: `${sliderpos}%`, transform: 'translateX(-50%)', width: 3, background: 'white', boxShadow: '0 0 10px 3px rgba(255,255,255,0.9)', zIndex: 20, pointerEvents: 'none' }} />
       </div>
 
-      {/* probability scale */}
-      <div style={{ position: 'relative', height: 14, marginTop: 3 }}>
+      {/* scale labels */}
+      <div style={{ position: 'relative', height: 18, marginTop: 4 }}>
         {segs.map((seg, i) => (
-          <span key={i} style={{ position: 'absolute', left: `${seg.start * 100}%`, transform: 'translateX(-50%)', fontFamily: "'Nunito', sans-serif", color: '#b45309', fontSize: 8.5, top: 1 }}>
+          <span key={i} style={{ position: 'absolute', left: `${seg.start * 100}%`, transform: 'translateX(-50%)', fontFamily: "'Nunito', sans-serif", color: '#b45309', fontSize: 9, top: 2 }}>
             {seg.start === 0 ? '0' : seg.start.toFixed(2)}
           </span>
         ))}
-        <span style={{ position: 'absolute', right: 0, fontFamily: "'Nunito', sans-serif", color: '#b45309', fontSize: 8.5, top: 1 }}>1.00</span>
+        <span style={{ position: 'absolute', right: 0, fontFamily: "'Nunito', sans-serif", color: '#b45309', fontSize: 9, top: 2 }}>1.00</span>
       </div>
     </div>
   )

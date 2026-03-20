@@ -37,8 +37,7 @@ export default function gamescreen({ onback, config }) {
   const [ballsbowled,  setballsbowled]  = useState(0)
   const [bestscore,    setbestscore]    = useState(0)
   const [style,        setstyle]        = useState('aggressive')
-  const [phase,        setphase]        = useState('idle')  // idle | bowling | animating | gameover
-  const [sliderpos,    setsliderpos]    = useState(0)
+  const [phase,        setphase]        = useState('idle')
   const [ballx,        setballx]        = useState(700)
   const [bally,        setbally]        = useState(252)
   const [ballvisible,  setballvisible]  = useState(false)
@@ -50,24 +49,7 @@ export default function gamescreen({ onback, config }) {
   const [showprobguide,setshowprobguide]= useState(false)
 
   const slideref = useRef(0)
-  const dirref   = useRef(1)
-  const animframe = useRef(null)
   const sounds = useSounds()
-
-  // slider animation loop only during bowling phase
-  useEffect(() => {
-    if (phase !== 'bowling') return
-    const spd = speedmap[config.speed] || 0.52
-    const tick = () => {
-      slideref.current += dirref.current * spd
-      if (slideref.current >= 100) { slideref.current = 100; dirref.current = -1 }
-      if (slideref.current <= 0)   { slideref.current = 0;   dirref.current = 1  }
-      setsliderpos(slideref.current)
-      animframe.current = requestAnimationFrame(tick)
-    }
-    animframe.current = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(animframe.current)
-  }, [phase, config.speed])
 
   const startbowling = useCallback(() => {
     if (phase !== 'idle') return
@@ -80,8 +62,7 @@ export default function gamescreen({ onback, config }) {
 
   const handleshot = useCallback(() => {
     if (phase !== 'bowling') return
-    cancelAnimationFrame(animframe.current)
-
+    // outcome calculation now uses slideref.current
     const probs   = style === 'aggressive' ? aggressiveprobs : defensiveprobs
     const outcome = getoutcome(slideref.current, probs)
     const line    = pickline(outcome.label)
@@ -122,7 +103,7 @@ export default function gamescreen({ onback, config }) {
         } else {
           setTimeout(() => {
             setshowresult(false)
-            slideref.current = 0; dirref.current = 1; setsliderpos(0)
+            slideref.current = 0
             setphase('idle')
           }, 2400)
         }
@@ -132,9 +113,10 @@ export default function gamescreen({ onback, config }) {
 
   const handlerestart = () => {
     setruns(0); setwickets(0); setballsbowled(0)
-    setphase('idle'); slideref.current = 0; dirref.current = 1
-    setsliderpos(0); setshowresult(false); setlastresult(null)
+    setphase('idle'); slideref.current = 0
+    setshowresult(false); setlastresult(null)
     setballvisible(false); setswinging(false); setcomtext('')
+    setstyle('aggressive')
   }
 
   const canbowl    = phase === 'idle'
@@ -215,7 +197,7 @@ export default function gamescreen({ onback, config }) {
           </div>
 
           {/* power bar */}
-          <PowerBar probs={curprobs} sliderpos={sliderpos} onshot={handleshot} gamephase={phase} />
+          <PowerBar probs={curprobs} sliderRef={slideref} onshot={handleshot} gamephase={phase} speed={config.speed} />
 
           {/* commentary */}
           <CommentaryBox text={comtext} />
