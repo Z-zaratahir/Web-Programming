@@ -216,34 +216,39 @@ export default function gamescreen({ onback, config }) {
         />
       </div>
 
-      {/* RIGHT - probability guide toggle */}
+      {/* RIGHT - probability guide toggle (top-right, toggles on/off) */}
       <div style={{ position: 'absolute', top: 58, right: 12, zIndex: 20 }}>
+        {/* button stays fixed; guide floats absolutely below it */}
         <button onClick={() => setshowprobguide(p => !p)}
-          style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(255,255,255,.22)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,.3)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8 }}>
+          style={{ width: 36, height: 36, borderRadius: 10, background: showprobguide ? 'rgba(217,119,6,.9)' : 'rgba(255,255,255,.22)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,.3)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <span style={{ fontFamily: "'Baloo 2', cursive", fontWeight: 900, color: 'white', fontSize: 14 }}>%</span>
         </button>
-        {showprobguide && <ProbabilityGuide probs={curprobs} style={style} />}
+        {showprobguide && (
+          <div style={{ position: 'absolute', top: 44, right: 0 }}>
+            <ProbabilityGuide probs={curprobs} style={style} />
+          </div>
+        )}
       </div>
 
-      {/* BOTTOM HUD - Floating Side Panel */}
-      <div style={{ position: 'absolute', bottom: 16, right: 16, zIndex: 20, width: '38%', maxWidth: 480, minWidth: 320, background: 'rgba(255,251,235,.98)', backdropFilter: 'blur(12px)', border: '2px solid rgba(217,119,6,.2)', borderRadius: 24, boxShadow: '0 8px 32px rgba(0,0,0,.22)' }}>
-        <div style={{ padding: '14px 18px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+      {/* RIGHT HUD CARD - compact floating panel, right side */}
+      <div style={{ position: 'absolute', bottom: 16, right: 16, zIndex: 20, width: 380, background: 'rgba(255,251,235,.97)', backdropFilter: 'blur(12px)', border: '2px solid rgba(217,119,6,.22)', borderRadius: 20, boxShadow: '0 8px 28px rgba(0,0,0,.22)' }}>
+        <div style={{ padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
 
           {/* batting style + bowl button */}
-          <div style={{ display: 'flex', gap: 8, alignItems: 'stretch' }}>
+          <div style={{ display: 'flex', gap: 6, alignItems: 'stretch' }}>
             <div style={{ flex: 1 }}>
               <BattingStylePicker style={style} onchange={setstyle} disabled={!canbowl} />
             </div>
             <button
               onClick={canbowl ? startbowling : canbat ? handleshot : undefined}
               disabled={phase === 'animating' || isgameover}
-              style={{ flexShrink: 0, width: 95, borderRadius: 14, border: 'none', cursor: (phase === 'animating' || isgameover) ? 'not-allowed' : 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, background: canbowl ? 'linear-gradient(135deg,#f59e0b,#d97706)' : canbat ? 'linear-gradient(135deg,#3d7a1f,#2a5714)' : '#e5e7eb', opacity: (phase === 'animating' || isgameover) ? .55 : 1, transition: 'all .18s', boxShadow: canbowl ? '0 3px 14px rgba(245,158,11,.45)' : canbat ? '0 3px 14px rgba(61,122,31,.4)' : 'none' }}>
+              style={{ flexShrink: 0, width: 84, borderRadius: 13, border: 'none', cursor: (phase === 'animating' || isgameover) ? 'not-allowed' : 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, background: canbowl ? 'linear-gradient(135deg,#f59e0b,#d97706)' : canbat ? 'linear-gradient(135deg,#3d7a1f,#2a5714)' : '#e5e7eb', opacity: (phase === 'animating' || isgameover) ? .55 : 1, transition: 'all .18s', boxShadow: canbowl ? '0 3px 14px rgba(245,158,11,.45)' : canbat ? '0 3px 14px rgba(61,122,31,.4)' : 'none' }}>
               {canbowl ? (
-                <><IPlay /><span style={{ fontFamily: "'Baloo 2', cursive", fontWeight: 900, color: 'white', fontSize: 14 }}>BOWL!</span></>
+                <><IPlay /><span style={{ fontFamily: "'Baloo 2', cursive", fontWeight: 900, color: 'white', fontSize: 12 }}>BOWL!</span></>
               ) : canbat ? (
-                <><span style={{ fontFamily: "'Baloo 2', cursive", fontWeight: 900, color: 'white', fontSize: 22, lineHeight: 1 }}>HIT!</span><span style={{ fontFamily: "'Nunito', sans-serif", fontSize: 9, color: 'rgba(255,255,255,.85)' }}>tap bar too</span></>
+                <><span style={{ fontFamily: "'Baloo 2', cursive", fontWeight: 900, color: 'white', fontSize: 19, lineHeight: 1 }}>HIT!</span></>
               ) : (
-                <span style={{ fontFamily: "'Nunito', sans-serif", fontSize: 13, color: '#9ca3af' }}>...</span>
+                <span style={{ fontFamily: "'Nunito', sans-serif", fontSize: 11, color: '#9ca3af' }}>...</span>
               )}
             </button>
           </div>
@@ -255,6 +260,7 @@ export default function gamescreen({ onback, config }) {
           <CommentaryBox text={comtext} />
         </div>
       </div>
+
     </div>
   )
 }
