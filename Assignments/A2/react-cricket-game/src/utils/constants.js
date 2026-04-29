@@ -72,7 +72,7 @@ export const commentary = {
   ],
 }
 
-export const sliderSpeed = 2.5
+export const sliderSpeed = 1.5
 
-export const speedmap = { slow: 1.5, normal: 2.5, fast: 4.0 }
+export const speedmap = { slow: 1.0, normal: 1.5, fast: 2.0}
 
